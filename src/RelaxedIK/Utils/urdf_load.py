@@ -2,7 +2,7 @@ __author__ = 'drakita'
 
 
 from urdf_parser_py.urdf import URDF
-from ..Spacetime.arm import *
+from RelaxedIK.Spacetime.arm import *
 
 
 # try:
@@ -13,7 +13,7 @@ from ..Spacetime.arm import *
 #           'https://www.boost.org/doc/libs/1_67_0/more/getting_started/unix-variants.html'
 #     arm_c = False
 
-from colors import *
+from .colors import *
 import kdl_parser_py.urdf as pyurdf
 import PyKDL as kdl
 
@@ -165,12 +165,12 @@ def convertToArm(urdf_robot, startJoint, endJoint, fixedJoint, Debug=False):
         if j.name == endJoint:
             e = j
     if s == []:
-        print(bcolors.FAIL + 'startJoint: {} not found in joint list!  Please check to make sure startJoint is a joint found in' \)
-                         'the URDF and is spelled correctly'.format(startJoint) + bcolors.ENDC
+        print(bcolors.FAIL + 'startJoint: {} not found in joint list!  Please check to make sure startJoint is a joint found in' \
+                         'the URDF and is spelled correctly'.format(startJoint) + bcolors.ENDC)
         raise ValueError('Invalid Value.  Exiting.')
     if e == []:
-        print(bcolors.FAIL + 'endJoint: {} not found in joint list!  Please check to make sure endJoint is a joint found in' \)
-                         'the URDF and is spelled correctly'.format(endJoint).format(startJoint) + bcolors.ENDC
+        print(bcolors.FAIL + 'endJoint: {} not found in joint list!  Please check to make sure endJoint is a joint found in' \
+                         'the URDF and is spelled correctly'.format(endJoint).format(startJoint) + bcolors.ENDC)
         raise ValueError('Invalid Value.  Exiting.')
 
     name = urdf_robot.name

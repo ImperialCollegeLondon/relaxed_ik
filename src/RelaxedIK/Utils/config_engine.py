@@ -1,9 +1,9 @@
 import numpy as np
-from colors import bcolors
+from .colors import bcolors
 from os import listdir
-from sklearn.externals import joblib
+import joblib
 from os.path import isfile, join
-from neural_net_trainer import Collision_NN_Trainer
+from .neural_net_trainer import Collision_NN_Trainer
 import os
 
 

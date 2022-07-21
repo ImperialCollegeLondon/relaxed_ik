@@ -1,6 +1,6 @@
 import math
 import numpy
-from _transformations import *
+from ._transformations import *
 
 # added by Danny Rakita
 def quaternion_log(quaternion):

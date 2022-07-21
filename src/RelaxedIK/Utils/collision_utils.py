@@ -50,7 +50,8 @@ class Collision_Object_Container:
         for i,c in enumerate(self.collision_objects):
             c.marker.id = i
 
-    def get_min_distance(self, (a, b)):
+    def get_min_distance(self, pair):
+        a, b = pair
         obja = self.collision_objects[a].obj
         objb = self.collision_objects[b].obj
 
