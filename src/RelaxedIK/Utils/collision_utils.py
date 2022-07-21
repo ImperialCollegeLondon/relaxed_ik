@@ -347,7 +347,7 @@ class Collision_Mesh(Collision_Object):
         self.make_rviz_marker()
 
     def make_rviz_marker(self):
-        print bc.WARNING + 'WARNING: Mesh collision object not supported in rviz visualization' + bc.ENDC
+        print(bc.WARNING + 'WARNING: Mesh collision object not supported in rviz visualization' + bc.ENDC)
         self.marker.scale.x = 0.0001
         self.marker.scale.y = 0.0001
         self.marker.scale.z = 0.0001

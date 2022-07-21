@@ -37,7 +37,7 @@ class EMA_filter:
 if __name__ == '__main__':
     ema = EMA_filter([1,2,3])
     for i in range(20):
-        print ema.filter([4,5,6])
+        print(ema.filter([4,5,6]))
 
 
 

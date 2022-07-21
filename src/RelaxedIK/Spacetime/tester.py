@@ -32,10 +32,10 @@ for i in xrange(test_size):
     # print frames[0][0]
 end = time.clock()
 
-print (end - start) / test_size
+print((end - start) / test_size)
 
-print 'l1: ' + str(np.linalg.norm(ee_pos_c - ee_pos, ord=1))
-print 'l2: ' + str(np.linalg.norm(ee_pos_c - ee_pos))
-print 'linf: ' + str(np.linalg.norm(ee_pos_c - ee_pos, ord=np.inf))
+print('l1: ' + str(np.linalg.norm(ee_pos_c - ee_pos, ord=1)))
+print('l2: ' + str(np.linalg.norm(ee_pos_c - ee_pos)))
+print('linf: ' + str(np.linalg.norm(ee_pos_c - ee_pos, ord=np.inf)))
 
 
