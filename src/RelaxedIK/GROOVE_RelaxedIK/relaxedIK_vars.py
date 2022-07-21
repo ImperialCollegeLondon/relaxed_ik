@@ -12,7 +12,7 @@ from ..Utils.collision_graph import Collision_Graph
 from ..Utils.config_engine import Config_Engine
 import rospy
 import os
-from sklearn.externals import joblib
+import joblib
 
 
 
@@ -78,7 +78,7 @@ class RelaxedIK_vars(Vars):
 
 
         if full_arms == []:
-            for i in xrange(self.num_chains):
+            for i in range(self.num_chains):
                 urdf_robot, arm, arm_c, tree = urdf_load(urdf_path, '', '', full_joint_lists[i], fixed_ee_joints[i])
                 if self.c_boost:
                     self.arms.append(arm_c)

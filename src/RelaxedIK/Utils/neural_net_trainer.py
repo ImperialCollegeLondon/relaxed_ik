@@ -1,7 +1,7 @@
 import numpy as np
-from collision_graph import Collision_Graph
+from .collision_graph import Collision_Graph
 from sklearn.neural_network import MLPClassifier, MLPRegressor
-from sklearn.externals import joblib
+import joblib
 import pickle
 
 import time

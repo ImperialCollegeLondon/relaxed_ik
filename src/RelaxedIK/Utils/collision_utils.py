@@ -1,10 +1,10 @@
 import fcl
 import numpy as np
 import yaml
-from colors import bcolors as bc
+from .colors import bcolors as bc
 from visualization_msgs.msg import Marker
 import rospy
-import transformations as T
+import RelaxedIK.Utils.transformations as T
 
 
 class Collision_Object_Container:
@@ -50,9 +50,9 @@ class Collision_Object_Container:
         for i,c in enumerate(self.collision_objects):
             c.marker.id = i
 
-    def get_min_distance(self, (a, b)):
-        obja = self.collision_objects[a].obj
-        objb = self.collision_objects[b].obj
+    def get_min_distance(self, pair):
+        obja = self.collision_objects[pair[0]].obj
+        objb = self.collision_objects[pair[1]].obj
 
         self.request = fcl.DistanceRequest()
         self.result = fcl.DistanceResult()

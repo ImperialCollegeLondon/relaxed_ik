@@ -1,4 +1,4 @@
-from collision_utils import Collision_Object_Container
+from .collision_utils import Collision_Object_Container
 import numpy as np
 import itertools
 import math
