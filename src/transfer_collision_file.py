@@ -5,7 +5,7 @@ def __get_collision_file_yaml(info_file_yaml):
     collision_file_name = info_file_yaml['collision_file_name']
     fp = path_to_src + '/RelaxedIK/Config/collision_files/' + collision_file_name
     collision_file = open(fp)
-    y = yaml.load(collision_file)
+    y = yaml.full_load(collision_file)
     return y
 
 def __get_robot_link_radius_string(collision_file_yaml):
@@ -18,7 +18,7 @@ def __get_boxes_string(collision_file_yaml, info_file_yaml):
     if collision_file_yaml['boxes'] == None:
         return out_str
     else:
-        for i in xrange(len(collision_file_yaml['boxes'])):
+        for i in range(len(collision_file_yaml['boxes'])):
             out_str += __get_box_string(collision_file_yaml, info_file_yaml, i)
 
     return out_str
@@ -41,7 +41,7 @@ def __get_spheres_string(collision_file_yaml, info_file_yaml):
     if collision_file_yaml['spheres'] == None:
         return out_str
     else:
-        for i in xrange(len(collision_file_yaml['spheres'])):
+        for i in range(len(collision_file_yaml['spheres'])):
             out_str += __get_sphere_string(collision_file_yaml, info_file_yaml, i)
 
     return out_str
@@ -83,19 +83,19 @@ def transfer_collision_file(path_to_src, info_file_yaml):
     out_str += __get_boxes_string(collision_file_yaml, info_file_yaml) + '\n'
     out_str += __get_spheres_string(collision_file_yaml, info_file_yaml) + '\n'
 
-    print out_str
+    print(out_str)
     __output_collision_file(path_to_src, info_file_yaml, out_str)
 
 def transfer_from_loaded_info_file(path_to_src):
     fp = path_to_src + '/RelaxedIK/Config/loaded_robot'
     loaded_robot = open(fp).readline()
     info_file_fp = path_to_src + '/RelaxedIK/Config/info_files/' + loaded_robot
-    info_file_yaml = yaml.load(open(info_file_fp))
+    info_file_yaml = yaml.full_load(open(info_file_fp))
     transfer_collision_file(path_to_src, info_file_yaml)
 
 def transfer_from_info_file(path_to_src, info_file_name):
     info_file_fp = path_to_src + '/RelaxedIK/Config/info_files/' + info_file_name
-    info_file_yaml = yaml.load(open(info_file_fp))
+    info_file_yaml = yaml.full_load(open(info_file_fp))
     transfer_collision_file(path_to_src, info_file_yaml)
 
 

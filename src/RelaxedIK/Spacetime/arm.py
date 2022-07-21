@@ -46,7 +46,7 @@ def rotMatrix(axis, s, c):
     elif axis=="X" or axis=="x":
         return N.array([[1,0,0,0], [0,c,-s,0], [0,s,c,0], [0,0,0,1]])
     else:
-        print "Unsupported Axis:", axis
+        print("Unsupported Axis:", axis)
         raise NotImplementedError
 
 '''
@@ -76,7 +76,7 @@ def rotTransMatrix(axis, s, c, t):
                         [0,s, c,AD.fastLC2(s,t[1],c, t[2])],
                         [0,0,0,1]])
     else:
-        print "Unsupported Axis:", axis
+        print("Unsupported Axis:", axis)
         raise NotImplementedError
 '''
 
@@ -97,7 +97,7 @@ def rot3(axis, s, c):
     elif axis=="X" or axis=="x" or axis == '-x':
         return N.array([[1.0,0.0,0.0], [0.0,c,-s], [0.0,s,c] ])
     else:
-        print "Unsupported Axis:", axis
+        print("Unsupported Axis:", axis)
         raise NotImplementedError
 
 def eulerTupleTo3x3(t):
@@ -145,7 +145,7 @@ def rotTransMatrixNOAD(axis, s, c, t):
                         [0,s, c, s*t[1] + c * t[2]],
                         [0,0,0,1]])
     else:
-        print "Unsupported Axis:", axis
+        print("Unsupported Axis:", axis)
         raise NotImplementedError
 
 
@@ -445,7 +445,7 @@ class Arm(robot_function.RobotFunction):
                 if not (self.rotOffsets[i+1] is None):
                     rot = rot.dot(self.rotOffsets[i+1])
 
-            # print end - start
+            # print(end - start)
             pts.append( pt )
             frames.append(rot)
         return pts,frames
@@ -546,7 +546,7 @@ class Arm(robot_function.RobotFunction):
     def getMatrixConditioningMeasure(self, state):
         j = self.getJacobian(state)
         U,s,V = N.linalg.svd(j)
-        # print s
+        # print(s)
         singVal_largest = s[0]
         singVal_smallest = s[-1]
         return  singVal_smallest / singVal_largest

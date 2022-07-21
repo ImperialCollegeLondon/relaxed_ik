@@ -37,7 +37,7 @@ class Collision_Graph:
             dis = self.c.get_min_distance(pair)
             if dis == -1:
                 dis = 0.0
-            # print dis
+            # print(dis)
 
             c = c_values[l1,l2]
             if not c == 0.0:
@@ -90,8 +90,8 @@ class Collision_Graph:
     def get_c_values(self, original_distances):
         shape = self.original_distances.shape
         c_values = np.zeros(shape)
-        for i in xrange(shape[0]):
-            for j in xrange(shape[1]):
+        for i in range(shape[0]):
+            for j in range(shape[1]):
                 if original_distances[i,j] <= .001:
                     c_values[i,j] = 0.0
                 else:
