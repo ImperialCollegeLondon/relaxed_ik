@@ -139,7 +139,7 @@ class RelaxedIK_vars(Vars):
         velocity_constraints = True
         velocity_scale = 1.0
         if velocity_constraints:
-            for i in xrange(self.robot.numDOF):
+            for i in range(self.robot.numDOF):
                 self.constraints += (Joint_Velocity_Constraint(i,velocity_scale),)
 
 

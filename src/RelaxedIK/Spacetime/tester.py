@@ -17,7 +17,7 @@ test_size = 10000
 # print a.dispOffset
 
 start = time.clock()
-for i in xrange(test_size):
+for i in range(test_size):
     frames = a.getFrames(state)
     ee_pos = frames[0][-1]
     # print frames[0][0]
@@ -26,7 +26,7 @@ end = time.clock()
 print (end - start) / test_size
 
 start = time.clock()
-for i in xrange(test_size):
+for i in range(test_size):
     frames = ac.getFrames(state)
     ee_pos_c = frames[0][-1]
     # print frames[0][0]

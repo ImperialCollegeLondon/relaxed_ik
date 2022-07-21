@@ -8,7 +8,7 @@ class EMA_filter:
         self.a = a
         self.window_size = window_size
         self.filtered_signal = []
-        for i in xrange(window_size):
+        for i in range(window_size):
             self.filtered_signal.append(np.array(init_state))
 
     def filter(self, state):
@@ -18,7 +18,7 @@ class EMA_filter:
         filtered_state = np.zeros((len(state)))
 
         sum = 0.0
-        for i in xrange(self.window_size):
+        for i in range(self.window_size):
             weights[i] = self.a*(1.0 - self.a)**(i)
             if i == 0:
                 filtered_state = weights[i]*state_arr

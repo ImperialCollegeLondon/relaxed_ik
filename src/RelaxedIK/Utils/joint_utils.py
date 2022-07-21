@@ -18,7 +18,7 @@ def interpolate_to_joint_limits(from_q, to_q, t=0.1, numDOF=6, joint_limits=None
     else:
         limits = joint_limits
 
-    for i in xrange(numDOF):
+    for i in range(numDOF):
         disp = to_q[i] - from_q[i]
         disp_norm = abs(disp)
 
