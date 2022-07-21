@@ -1,7 +1,7 @@
 __author__ = 'drakita'
 
 from abc import ABCMeta, abstractmethod
-from objective import get_groove_global_vars
+from .objective import get_groove_global_vars
 import scipy.optimize as O
 
 class Constraint:

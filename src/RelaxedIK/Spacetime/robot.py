@@ -1,4 +1,4 @@
-import arm
+import RelaxedIK.Spacetime.arm
 from ..Utils.transformations import quaternion_from_matrix
 
 class Robot:
