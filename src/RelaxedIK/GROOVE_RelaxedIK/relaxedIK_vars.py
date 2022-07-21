@@ -55,12 +55,12 @@ class RelaxedIK_vars(Vars):
             raise ValueError('Invalid position_mode.')
         num_objs = len(objectives)
         if not (num_objs == len(weight_funcs) == len(weight_priors)):
-            print(bcolors.FAIL + 'Invalid Inputs.  The number of objectives ({}) must be the same as the number' \)
+            print(bcolors.FAIL + 'Invalid Inputs.  The number of objectives ({}) must be the same as the number' \
                                  'of weight functions ({}) and weight priors ({}).  Exiting.'.format(str(num_objs),
                                                                                                      str(len(
                                                                                                          weight_funcs)),
                                                                                                      str(len(
-                                                                                                         weight_priors))) + bcolors.ENDC
+                                                                                                         weight_priors))) + bcolors.ENDC)
             raise ValueError('Invalid function arguments.')
         ###################################################################################################################################
 

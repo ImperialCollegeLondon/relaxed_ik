@@ -1,6 +1,6 @@
-import arm
+import RelaxedIK.Spacetime.arm
 import numpy as np
-from ..Utils.transformations import quaternion_from_matrix
+from RelaxedIK.Utils.transformations import quaternion_from_matrix
 
 class Robot:
     def __init__(self, arms, full_joint_lists, joint_order):

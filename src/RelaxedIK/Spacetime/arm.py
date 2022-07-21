@@ -1,7 +1,7 @@
 __author__ = 'gleicher'
 
 # stuff for doing articulated figures
-import robot_function
+import RelaxedIK.Spacetime.robot_function
 
 import math
 # import adInterface as AD
