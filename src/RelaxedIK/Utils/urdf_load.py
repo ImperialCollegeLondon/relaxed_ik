@@ -13,7 +13,7 @@ from ..Spacetime.arm import *
 #           'https://www.boost.org/doc/libs/1_67_0/more/getting_started/unix-variants.html'
 #     arm_c = False
 
-from colors import *
+from .colors import *
 import kdl_parser_py.urdf as pyurdf
 import PyKDL as kdl
 
