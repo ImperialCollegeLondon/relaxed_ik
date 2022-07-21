@@ -12,7 +12,7 @@ from ..Utils.collision_graph import Collision_Graph
 from ..Utils.config_engine import Config_Engine
 # import rospy
 import os
-from sklearn.externals import joblib
+import joblib
 from RelaxedIK.Utils.yaml_utils import get_relaxedIK_yaml_obj
 import rospy
 
