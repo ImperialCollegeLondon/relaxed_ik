@@ -5,6 +5,7 @@ from .colors import bcolors as bc
 from visualization_msgs.msg import Marker
 import rospy
 import RelaxedIK.Utils.transformations as T
+from RelaxedIK.Utils.prl_amiga_fix import adapt_cylinder_shapes_to_amiga, fix_tansforms_amiga
 
 
 class Collision_Object_Container:
@@ -77,11 +78,17 @@ class Collision_Object_Container:
                     ptB = jtPts[l+1]
                     midPt = ptA + 0.5*(ptB - ptA)
                     dis = np.linalg.norm(ptA - ptB)
+                    radius_factor, dis = adapt_cylinder_shapes_to_amiga(l)
                     if dis < 0.02:
                         continue
 
-                    cylinder = Collision_Cylinder.init_with_arguments('robotLink_' + str(arm_idx) + '_' + str(l),
-                                                                      curr_idx,[0,0,0],midPt,[self.robot_link_radius,dis])
+                    cylinder = Collision_Cylinder.init_with_arguments(
+                        'robotLink_' + str(arm_idx) + '_' + str(l),
+                        curr_idx,
+                        [0,0,0],
+                        midPt,
+                        [self.robot_link_radius * radius_factor, dis]
+                        )
                     cylinder.type = 'robot_link'
                     self.collision_objects.append(cylinder)
 
@@ -106,6 +113,9 @@ class Collision_Object_Container:
                 link_id = int(name_arr[2])
                 ptA = all_frames[arm_id][0][link_id]
                 ptB = all_frames[arm_id][0][link_id+1]
+                print(ptA)
+                ptA, ptB = fix_tansforms_amiga(ptA, ptB, link_id)
+
                 midPt = ptA + 0.5 * (ptB - ptA)
                 final_pos = midPt
 
