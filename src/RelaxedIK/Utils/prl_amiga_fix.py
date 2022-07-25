@@ -3,12 +3,12 @@ import copy
 
 CYLINDER_SHAPES = {
        # radius factor, urdf length * adjustment factor
-    0: (1.5, 0.038 * 5),  # base
+    0: (1.6, 0.038 * 5),  # base
     1: (1.5, 0.178 * 1.2),  # shoulder
     2: (1.5, 0.613 * 1.3),  # upper arm
     3: (1.3, 0.571 * 1.1),  # forearm
-    4: (1.4, 0.12  * 1.4),  # wrist 1
-    5: (1.4, 0.12  * 1.4),  # wrist 2
+    4: (1.3, 0.12  * 1.4),  # wrist 1
+    5: (1.3, 0.12  * 1.4),  # wrist 2
     6: (0.9, 0.05  * 1.7),  # wrist 3
     7: (1.5, 0.28),  # ?
 }
