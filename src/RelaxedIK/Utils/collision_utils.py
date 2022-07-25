@@ -113,8 +113,7 @@ class Collision_Object_Container:
                 link_id = int(name_arr[2])
                 ptA = all_frames[arm_id][0][link_id]
                 ptB = all_frames[arm_id][0][link_id+1]
-                print(ptA)
-                ptA, ptB = fix_tansforms_amiga(ptA, ptB, link_id)
+                ptA, ptB = fix_tansforms_amiga(ptA, ptB, link_id, all_frames)
 
                 midPt = ptA + 0.5 * (ptB - ptA)
                 final_pos = midPt
