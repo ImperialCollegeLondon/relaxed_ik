@@ -143,6 +143,7 @@ class Collision_Object_Container:
                     rot_mat = rotations[frame_len-1]
                     final_pos = positions[frame_len-1]
                 else:
+                    print(c/)
                     rot_mat = rotations[coordinate_frame]
                     final_pos = positions[coordinate_frame-1]
 

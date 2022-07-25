@@ -18,22 +18,22 @@ def adapt_cylinder_shapes_to_amiga(link_id: int) -> Tuple[float, float]:
 
 def fix_tansforms_amiga(ptA, ptB, link_id, all_frames):
     ptA, ptB = copy.deepcopy(ptA), copy.deepcopy(ptB)
-    link67_offset = [-0.13, -0.1, -0.13]
+    # link67_offset = [-0.13, -0.1, -0.13]
 
     # Fix elbow offset defined in ur10e urdf
     if link_id == 2:
         rot = all_frames[0][1][3]
         ptB = ptB + rot.dot([0, 0.137 ,0])
 
-    elif link_id == 6:
-        rot = all_frames[0][1][7]
-        ptB = ptB + rot.dot(link67_offset)
+    # elif link_id == 6:
+    #     rot = all_frames[0][1][7]
+    #     ptB = ptB + rot.dot(link67_offset)
 
-    elif link_id == 7:
-        rot = all_frames[0][1][7]
-        ptA = ptA + rot.dot(link67_offset)
+    # elif link_id == 7:
+    #     rot = all_frames[0][1][7]
+    #     ptA = ptA + rot.dot(link67_offset)
         
-        rot = all_frames[0][1][8]
-        ptB = ptB + rot.dot([-0.22, 0.23, -0.23])
+    #     rot = all_frames[0][1][8]
+    #     ptB = ptB + rot.dot([-0.22, 0.23, -0.23])
 
     return ptA, ptB
