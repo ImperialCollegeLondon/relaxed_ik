@@ -78,7 +78,10 @@ class Collision_Object_Container:
                     ptB = jtPts[l+1]
                     midPt = ptA + 0.5*(ptB - ptA)
                     dis = np.linalg.norm(ptA - ptB)
-                    radius_factor, dis = adapt_cylinder_shapes_to_amiga(l)
+                    radius_factor, corr_dis = adapt_cylinder_shapes_to_amiga(l)
+                    if corr_dis is not None:
+                        dis = corr_dis
+                    
                     if dis < 0.02:
                         continue
 
