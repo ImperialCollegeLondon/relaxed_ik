@@ -23,7 +23,7 @@ impl RelaxedIK {
     }
 
     pub fn from_yaml_path(fp: String, mode: usize) -> Self {
-        let vars = RelaxedIKVars::from_yaml_path(fp.clone(), true, true);
+        let vars = RelaxedIKVars::from_yaml_path(fp.clone(), false, false);
         let mut om = ObjectiveMaster::relaxed_ik(vars.robot.num_chains);
         if mode == 0 {
             om = ObjectiveMaster::standard_ik(vars.robot.num_chains);
