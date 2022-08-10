@@ -24,3 +24,8 @@ librelaxed_ik = { path = "../librelaxed_ik" }
 [[bin]]
 name = "relaxed_ik_node"
 path = "src/relaxed_ik_node.rs"
+
+
+[[bin]]
+name = "relaxed_ik_custom_node"
+path = "src/relaxed_ik_custom_node.rs"
