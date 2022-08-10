@@ -1,11 +1,17 @@
-use crate::lib::groove::vars::RelaxedIKVars;
-use crate::lib::groove::groove::{OptimizationEngineOpen, OptimizationEngineNLopt};
-use crate::lib::groove::objective_master::ObjectiveMaster;
-use crate::lib::utils_rust::file_utils::{*};
-use crate::lib::utils_rust::subscriber_utils::EEPoseGoalsSubscriber;
-use crate::lib::utils_rust::transformations::{*};
+#![allow(unused_must_use)]
+
+pub mod groove;
+pub mod spacetime;
+pub mod utils_rust;
+
+use crate::groove::vars::RelaxedIKVars;
+use crate::groove::groove::{OptimizationEngineOpen, OptimizationEngineNLopt};
+use crate::groove::objective_master::ObjectiveMaster;
+use crate::utils_rust::file_utils::{*};
+use crate::utils_rust::subscriber_utils::EEPoseGoalsSubscriber;
+use crate::utils_rust::transformations::{*};
 use nalgebra::{Vector3, UnitQuaternion, Quaternion};
-use crate::lib::utils_rust::sampler::ThreadSampler;
+use crate::utils_rust::sampler::ThreadSampler;
 
 
 pub struct RelaxedIK {

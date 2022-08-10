@@ -1,8 +1,8 @@
-pub mod lib;
+extern  crate RelaxedIK_Rust;
 
-use lib::utils_rust::self_collision_engine::SelfCollisionEngine;
+use crate::relaxed_ik::utils_rust::self_collision_engine::SelfCollisionEngine;
 use std::time::{Instant, Duration};
-use lib::utils_rust::sampler::{ThreadRobotSampler, ThreadSampler};
+use crate::relaxed_ik::utils_rust::sampler::{ThreadRobotSampler, ThreadSampler};
 
 
 fn main() {

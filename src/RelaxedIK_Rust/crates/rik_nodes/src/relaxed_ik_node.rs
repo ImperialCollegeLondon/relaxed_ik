@@ -1,11 +1,7 @@
-pub mod lib;
-use crate::lib::relaxed_ik;
-use crate::lib::utils_rust::subscriber_utils::EEPoseGoalsSubscriber;
+use librelaxed_ik::utils_rust::subscriber_utils::EEPoseGoalsSubscriber;
 use std::sync::{Arc, Mutex};
 use rosrust;
 use nalgebra::{Vector3, UnitQuaternion, Quaternion};
-use crate::lib::utils_rust::subscriber_utils::{*};
-
 
 mod msg {
     rosrust::rosmsg_include!(relaxed_ik / EEPoseGoals, relaxed_ik / JointAngles);
@@ -14,17 +10,21 @@ mod msg {
 fn main() {
     rosrust::init("relaxed_ik");
 
-    let mut r = relaxed_ik::RelaxedIK::from_loaded(0);
+    println!("solver initialized!");
+
+    let mut r = librelaxed_ik::RelaxedIK::from_loaded(1);
 
     let arc = Arc::new(Mutex::new(EEPoseGoalsSubscriber::new()));
     let arc2 = arc.clone();
-    let subscriber = rosrust::subscribe("/relaxed_ik/ee_pose_goals", 100, move |v: msg::relaxed_ik::EEPoseGoals| {
+    let _subscriber = rosrust::subscribe("/relaxed_ik/ee_pose_goals", 3, move |v: msg::relaxed_ik::EEPoseGoals| {
         let mut g = arc2.lock().unwrap();
+        g.seed_states = Vec::new();
         g.pos_goals = Vec::new();
         g.quat_goals = Vec::new();
 
         let num_poses = v.ee_poses.len();
 
+        g.seed_states= v.seed_states.data;
         for i in 0..num_poses {
             g.pos_goals.push( Vector3::new(v.ee_poses[i].position.x, v.ee_poses[i].position.y, v.ee_poses[i].position.z) );
             let tmp_q = Quaternion::new(v.ee_poses[i].orientation.w, v.ee_poses[i].orientation.x, v.ee_poses[i].orientation.y, v.ee_poses[i].orientation.z);
@@ -36,16 +36,17 @@ fn main() {
     let rate1 = rosrust::rate(100.);
     while arc.lock().unwrap().pos_goals.is_empty() {rate1.sleep();}
 
-    let rate = rosrust::rate(10000.);
+    let rate = rosrust::rate(3000.);
     while rosrust::is_ok() {
-        let x = r.solve_precise(&arc.lock().unwrap());
+        let x = r.solve(&arc.lock().unwrap());
         println!("{:?}", x);
+        // println!("{:?}", r.vars.init_ee_positions);
 
         let mut ja = msg::relaxed_ik::JointAngles::default();
         for i in 0..x.len() {
             ja.angles.data.push(x[i]);
         }
-        publisher.send(ja);
+        publisher.send(ja).ok();
 
         rate.sleep();
     }

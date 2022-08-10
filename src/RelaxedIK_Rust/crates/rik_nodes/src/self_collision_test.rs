@@ -1,8 +1,8 @@
-pub mod lib;
+extern  crate relaxed_ik;
 
 use nalgebra::{Isometry3, Vector3, Point3, Quaternion, UnitQuaternion, Translation3, DVector};
-use lib::utils_rust::self_collision_engine::SelfCollisionEngine;
-use lib::utils_rust::collision_object::CollisionObject;
+use crate::relaxed_ik::utils_rust::self_collision_engine::SelfCollisionEngine;
+use crate::relaxed_ik::utils_rust::collision_object::CollisionObject;
 use ncollide3d::query;
 use ncollide3d::query::{Proximity, PointQuery};
 use ncollide3d::shape::FeatureId;

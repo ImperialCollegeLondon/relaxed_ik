@@ -1,11 +1,10 @@
-pub mod lib;
-
-use lib::utils_rust::yaml_utils::RobotCollisionSpecFileParser;
-use lib::utils_rust::robot_shape_model::RobotShapeModel;
-use lib::utils_rust::file_utils::get_path_to_src;
+extern  crate RelaxedIK_Rust;
+use crate::relaxed_ik::utils_rust::yaml_utils::RobotCollisionSpecFileParser;
+use crate::relaxed_ik::utils_rust::robot_shape_model::RobotShapeModel;
+use crate::relaxed_ik::utils_rust::file_utils::get_path_to_src;
 use nalgebra::{UnitQuaternion, Quaternion, Vector3, Matrix3};
 use std::time::{Instant, Duration};
-use lib::utils_rust::transformations;
+use crate::relaxed_ik::utils_rust::transformations;
 
 fn main() {
     let path_to_src = get_path_to_src();
