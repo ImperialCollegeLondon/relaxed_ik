@@ -21,11 +21,13 @@ fn main() {
     let arc2 = arc.clone();
     let subscriber = rosrust::subscribe("/relaxed_ik/ee_pose_goals", 3, move |v: msg::relaxed_ik::EEPoseGoals| {
         let mut g = arc2.lock().unwrap();
+        g.seed_states = Vec::new();
         g.pos_goals = Vec::new();
         g.quat_goals = Vec::new();
 
         let num_poses = v.ee_poses.len();
 
+        g.seed_states= v.seed_states.data;
         for i in 0..num_poses {
             g.pos_goals.push( Vector3::new(v.ee_poses[i].position.x, v.ee_poses[i].position.y, v.ee_poses[i].position.z) );
             let tmp_q = Quaternion::new(v.ee_poses[i].orientation.w, v.ee_poses[i].orientation.x, v.ee_poses[i].orientation.y, v.ee_poses[i].orientation.z);
