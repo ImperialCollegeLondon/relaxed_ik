@@ -28,4 +28,9 @@ path = "src/relaxed_ik_node.rs"
 
 [[bin]]
 name = "relaxed_ik_custom_node"
-path = "src/relaxed_ik_custom_node.rs"
+path = "src/relaxed_ik_solver_in_callback.rs"
+
+
+[[bin]]
+name = "relaxed_ik_cmd"
+path = "src/relaxed_ik_cmd.rs"

@@ -21,6 +21,7 @@ pub struct RelaxedIK {
     pub groove_nlopt: OptimizationEngineNLopt
 }
 
+
 impl RelaxedIK {
     pub fn from_info_file_name(info_file_name: String, mode: usize) -> Self {
         let path_to_src = get_path_to_src();
@@ -63,7 +64,7 @@ impl RelaxedIK {
             }
         }
 
-        self.groove.optimize(&mut out_x, &self.vars, &self.om, 100);
+        self.groove.optimize(&mut out_x, &self.vars, &self.om, 1000);
 
         self.vars.update(out_x.clone());
 

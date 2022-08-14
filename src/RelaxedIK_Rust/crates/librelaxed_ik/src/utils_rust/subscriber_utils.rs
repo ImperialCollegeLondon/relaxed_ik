@@ -21,14 +21,16 @@ let subscriber = rosrust::subscribe("topic", 3, move |v: msg::std_msgs::UInt64| 
 pub struct EEPoseGoalsSubscriber {
     pub seed_states: Vec<f64>,
     pub pos_goals: Vec<Vector3<f64>>,
-    pub quat_goals: Vec<UnitQuaternion<f64>>
+    pub quat_goals: Vec<UnitQuaternion<f64>>,
+    pub req_id: String
 }
 impl EEPoseGoalsSubscriber {
     pub fn new() -> Self {
         let seed_states: Vec<f64> = Vec::new();
         let pos_goals: Vec<Vector3<f64>> = Vec::new();
         let quat_goals: Vec<UnitQuaternion<f64>> = Vec::new();
-        Self{seed_states, pos_goals, quat_goals}
+        let req_id: String = String::new();
+        Self{seed_states, pos_goals, quat_goals, req_id}
     }
 }
 /*
