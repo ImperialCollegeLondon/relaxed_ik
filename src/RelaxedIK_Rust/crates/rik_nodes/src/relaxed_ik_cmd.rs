@@ -5,7 +5,7 @@ use nalgebra::{Vector3, UnitQuaternion, Quaternion};
 
 fn main() {
     // Expects:          --- seed state --       position   quaternion
-    //     bin_name     "[j1, j2, ..., jn]"    "[x, y, z,   x, y, z, w]"
+    //     bin_name     "[j1, j2, ..., jn]"    "[x, y, z,   x, y, z, w]"   "info_file_path"
     let args: Vec<String> = env::args().collect();
 
     // Create the EEPoseGoal
@@ -17,8 +17,9 @@ fn main() {
     g.pos_goals.push( Vector3::new(target_pose[0], target_pose[1], target_pose[2]) );
     let tmp_q = Quaternion::new(target_pose[6], target_pose[3], target_pose[4], target_pose[5] );
     g.quat_goals.push( UnitQuaternion::from_quaternion(tmp_q) );
-
-    let mut r = librelaxed_ik::RelaxedIK::from_loaded(1);
+    // println!("{:?}", args[3]);
+    let info_file_path: String = args[3].clone();
+    let mut r = librelaxed_ik::RelaxedIK::from_yaml_path(info_file_path, 1);
     r.vars.xopt = g.seed_states.clone();
     r.vars.prev_state = g.seed_states.clone();
 

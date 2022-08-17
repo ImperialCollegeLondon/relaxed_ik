@@ -6,6 +6,7 @@ use nalgebra::{DMatrix, DVector};
 use crate::utils_rust::shape_parser_utils::{Cuboid, Sphere};
 
 pub fn get_yaml_obj(fp: String) -> Vec<Yaml> {
+    // println!("Loading yaml file: {}", fp);
     let mut file = File::open(fp.as_str()).unwrap();
     let mut contents = String::new();
     let res = file.read_to_string(&mut contents).unwrap();
