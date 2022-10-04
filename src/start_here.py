@@ -48,21 +48,21 @@ or negative experiences in using it.
 # Step 1b: Please set the following variable to the file name of your robot urdf.  For example, for the
 #   ur5 robot urdf already in the urdfs folder, this variable would read 'ur5.urdf'
 #   ex: urdf_file_name = 'ur5.urdf'
-urdf_file_name = ''
+urdf_file_name = 'amiga.urdf'
 ######################################################################################################
 
 
 ######################################################################################################
 # Step 1c: Please provide the fixed frame name.  This will be the root link name in the urdf
 #   ex: fixed_frame  = 'base_link'
-fixed_frame = ''
+fixed_frame = 'base_link'
 ######################################################################################################
 
 ######################################################################################################
 # Step 1d: At the end of this walk-through, there will be a central yaml file automatically generated that
 #   will contain information about your robot setup.  Please provide a name for that file.
 #   ex: info_file_name = 'ur5_info.yaml'
-info_file_name = ''
+info_file_name = 'amiga_info.yaml'
 ######################################################################################################
 
 
@@ -89,7 +89,7 @@ info_file_name = ''
 #                'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2'] ]
 #   example 2 shows what this would be for a single end-effector robot, specifically using the UR5 robot
 #   ex2: [ ['shoulder_pan_joint', 'shoulder_lift_joint', 'elbow_joint', 'wrist_1_joint', 'wrist_2_joint', 'wrist_3_joint'] ]
-joint_names = [ [ ] ]
+joint_names = [ ['base_arm_joint', 'amiga_arm_shoulder_pan_joint', 'amiga_arm_shoulder_lift_joint', 'amiga_arm_elbow_joint', 'amiga_arm_wrist_1_joint', 'amiga_arm_wrist_2_joint', 'amiga_arm_wrist_3_joint', 'amiga_arm_wrist_3_link-tool0_fixed_joint', 'arm_gripper_joint'] ]
 ######################################################################################################
 
 
@@ -109,7 +109,7 @@ joint_names = [ [ ] ]
 #   ex1: [ 'WAIST', 'RIGHT_SHOULDER_PITCH', 'RIGHT_SHOULDER_ROLL', 'RIGHT_SHOULDER_YAW', 'RIGHT_ELBOW', 'RIGHT_WRIST_YAW',
 #               'RIGHT_WRIST_PITCH', 'RIGHT_WRIST_YAW_2','LEFT_SHOULDER_PITCH', 'LEFT_SHOULDER_ROLL', 'LEFT_SHOULDER_YAW',
 #               'LEFT_ELBOW', 'LEFT_WRIST_YAW', 'LEFT_WRIST_PITCH', 'LEFT_WRIST_YAW_2' ]
-joint_ordering =  [ ]
+joint_ordering =  ['amiga_arm_shoulder_pan_joint', 'amiga_arm_shoulder_lift_joint', 'amiga_arm_elbow_joint', 'amiga_arm_wrist_1_joint', 'amiga_arm_wrist_2_joint', 'amiga_arm_wrist_3_joint']
 ######################################################################################################
 
 
@@ -124,7 +124,7 @@ joint_ordering =  [ ]
 #   ex1: ee_fixed_joints = ['RIGHT_HAND', 'LEFT_HAND']
 #   For example 2, using the UR5, this is a single chain robot, so it will only have a single end-effector joint
 #   ex2: ee_fixed_joints = ['ee_fixed_joint']
-ee_fixed_joints = [  ]
+ee_fixed_joints = [ "amiga_gripper_palm_tool0" ]
 ######################################################################################################
 
 
@@ -133,7 +133,7 @@ ee_fixed_joints = [  ]
 #   The configuration should be a single list of values for each joint's rotation (in radians) adhering
 #   to the joint order you specified in Step 3b
 #   ex: starting_config = [ 3.12769839, -0.03987385, -2.07729916, -1.03981438, -1.58652782, -1.5710159 ]
-starting_config = [ ]
+starting_config = [ 1.4486, -1.5882, 2.8274, -1.7977, 2.9845, -0.192 ]
 ######################################################################################################
 
 
@@ -152,12 +152,21 @@ starting_config = [ ]
 #
 # example function for the UR5:
 #
-# from sensor_msgs.msg import JointState
-# def joint_state_define(x):
-#    js = JointState()
-#    js.name = joint_ordering
-#    js.position = tuple(x)
-#    return js
+from sensor_msgs.msg import JointState
+def joint_state_define(x):
+   js = JointState()
+   additional_joints = [
+      "base_drive_wheel_right", "base_drive_wheel_left", "base_to_castor_front_left", 
+      "base_to_castor_back_left", "base_to_castor_front_right", "base_to_castor_back_right", 
+      "castor_to_front_wheel_left", "castor_to_back_wheel_left", "castor_to_front_wheel_right",
+      "castor_to_back_wheel_right", "amiga_gripper_finger_1_joint_1", "amiga_gripper_finger_1_joint_2",
+      "amiga_gripper_finger_1_joint_3", "amiga_gripper_finger_2_joint_1", "amiga_gripper_finger_2_joint_2",
+      "amiga_gripper_finger_2_joint_3", "amiga_gripper_finger_middle_joint_1", "amiga_gripper_finger_middle_joint_2",
+      "amiga_gripper_finger_middle_joint_3", "amiga_gripper_palm_finger_1_joint", "amiga_gripper_palm_finger_2_joint"
+      ]
+   js.name = joint_ordering + additional_joints
+   js.position = tuple(x) + tuple([0] * len(additional_joints))
+   return js
 #
 # example function for the DRC-Hubo+
 #
@@ -198,9 +207,9 @@ starting_config = [ ]
 #
 #
 # TODO: fill out this function, or leave it how it is for the default option
-from sensor_msgs.msg import JointState
-def joint_state_define(x):
-	return None
+# from sensor_msgs.msg import JointState
+# def joint_state_define(x):
+# 	return None
 
 
 ######################################################################################################
@@ -283,7 +292,7 @@ def joint_state_define(x):
 #
 #   Please provide the name of the collision file that you have been filling out in the RelaxedIK/Config directory:
 #   ex: collision_file_name = 'collision.yaml'
-collision_file_name = ' '
+collision_file_name = 'amiga_collisions.yaml'
 ###########################################################################################################
 
 
@@ -429,7 +438,7 @@ collision_file_name = ' '
 #   Solutions will be of a message type called JointAngles, which is another custom message type
 #   in the relaxed_ik package.
 #
-#   The JointAngles message has the following fields:
+#   The zles message has the following fields:
 #       std_msgs/Header header
 #       std_msgs/Float32[] angles
 #
